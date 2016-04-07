@@ -1,5 +1,6 @@
 #include "GL/freeglut.h"
 #include "GL/gl.h"
+
 void Triangle()
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -8,7 +9,7 @@ void Triangle()
     glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	glShadeModel(GL_SMOOTH);
  	glBegin(GL_TRIANGLES);
-        glColor3f(0, 0, 1);
+ 	glColor3f(0, 0, 1);
         glVertex3f(-0.3, 0, 0);
 	glColor3f(1, 1, 1);
         glVertex3f(0, 0.5, 0);
@@ -51,8 +52,8 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
-    glutInitWindowSize(800,600);
-    glutInitWindowPosition(100,100);
+    glutInitWindowSize(1366,768);
+    glutInitWindowPosition(0,0);
     glutCreateWindow("OpenGL - Tugas 1");
     glutDisplayFunc(Triangle);
     glutMainLoop();    
