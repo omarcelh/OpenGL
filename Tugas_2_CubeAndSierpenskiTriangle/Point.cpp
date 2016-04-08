@@ -42,11 +42,30 @@ void Point::setZ(const GLfloat z){
 	this->z = z;
 }
 
+Point Point::operator/(GLfloat divisor){
+	Point temp = Point(*this);
+	temp.x /= divisor;
+	temp.y /= divisor;
+	temp.z /= divisor;
+	return temp;
+}
+
+Point Point::operator+(Point P){
+	Point temp = Point(*this);
+	temp.x += P.x;
+	temp.y += P.y;
+	temp.z += P.z;
+	return temp;
+}
+
 //#include <iostream>
 //using namespace std;
 
 //int main(){
-	//Point P;
+	//Point P(5,5,5);
+	//cout << P+Point(5,5,5) << endl;
+	//cout << P << endl;
+	//cout << P/2.3 << endl;
 	//cout << P << endl;
 	//return 0;
 //}

@@ -5,7 +5,7 @@
 
 class Triangle{
 	public:
-		//Method
+		//methods
 		Triangle();
 		Triangle(Point points[3], Color color);
 		Triangle(Point p1, Point p2, Point p3, Color color);
@@ -16,11 +16,18 @@ class Triangle{
 		Point getPointAt(int index);
 		void setPointAt(int index, const Point P);
 		void draw();
-		void setTriangle(Point p1, Point p2, Point p3, Color color);
+		void drawOutline();
+		void drawSierpinski(Color colorMap[], int n, int code);
+		void drawSierpinski(Point &edge1, Point &edge2, Point &edge3, Color colorMap[], int n, int code);
+		
+		static const int SIERPINSKI_FILL;
+		static const int SIERPINSKI_OUTLINE;
 	private:
-		//Attribute
-		static const int SIDE;
+		//attribute
 		Point points[3];
 		Color color;
+		
+		//static
+		static const int SIDE;
 };
 

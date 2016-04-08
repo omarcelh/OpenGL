@@ -7,8 +7,8 @@
 #define RED 	Color(1, 0, 0)
 #define GREEN 	Color(0, 1, 0)
 #define BLUE 	Color(0, 0, 1)
-#define WHITE 	Color(0, 0, 0)
-#define BLACK	Color(1, 1, 1)
+#define BLACK 	Color(0, 0, 0)
+#define WHITE	Color(1, 1, 1)
 
 #include <iostream>
 using namespace std;

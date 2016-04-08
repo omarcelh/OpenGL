@@ -20,6 +20,8 @@ class Point{
 		void setX(const GLfloat x);
 		void setY(const GLfloat y);
 		void setZ(const GLfloat z);
+		Point operator/(GLfloat divisor);
+		Point operator+(Point P);
 		
 	private:
 		//attributes
