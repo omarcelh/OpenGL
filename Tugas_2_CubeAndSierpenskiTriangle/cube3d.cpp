@@ -120,6 +120,19 @@ void specialKeys( int key, int x, int y ) {
   glutPostRedisplay();
  
 }
+
+// ----------------------------------------------------------
+// reshape() Callback Function
+// ----------------------------------------------------------
+void reshape(int width, int height){
+	GLfloat aspectRatio = (GLfloat)width / (GLfloat)height;
+
+  glMatrixMode(GL_PROJECTION);
+
+  glLoadIdentity();
+
+  gluPerspective(0.0f, aspectRatio*2, 0.1f, 100.0f);
+}
  
 // ----------------------------------------------------------
 // main() function
@@ -141,6 +154,9 @@ int main(int argc, char* argv[]){
   // Callback functions
   glutDisplayFunc(display);
   glutSpecialFunc(specialKeys);
+  
+  // Prevent stretching when resizing windows
+	glutReshapeFunc(reshape);
  
   //  Pass control to GLUT for events
   glutMainLoop();

@@ -6,8 +6,7 @@ Point dividePoint(Point e1, Point e2) {
     GLfloat x = (e2.getX() + e1.getX())/2;
     GLfloat y = (e2.getY() + e1.getY())/2;
     GLfloat z = e2.getZ();
-    Point result(x,y,z);
-    return result;
+    return Point(x,y,z);
 }
 
 void drawSerpenskiTriangle(Point &edge1, Point &edge2, Point &edge3, Color &inner, Color &outer, int n) {
