@@ -1,5 +1,3 @@
-#include "GL/freeglut.h"
-#include "GL/gl.h"
 #include "Point.hpp"
 #include "Color.hpp"
 
@@ -28,6 +26,6 @@ class Triangle{
 		Color color;
 		
 		//static
-		static const int SIDE;
+		static const int CORNER;
 };
 

@@ -1,19 +1,19 @@
 #include "Triangle.hpp"
 #include <cassert>
 
-const int Triangle::SIDE = 3;
+const int Triangle::CORNER = 3;
 const int Triangle::SIERPINSKI_FILL = -1;
 const int Triangle::SIERPINSKI_OUTLINE = -2;
 
 Triangle::Triangle(){
-	for(int i=0; i<3; i++){
+	for(int i=0; i<CORNER; i++){
 		points[i] = Point(0.0f, 0.0f, 0.0f);
 	}
 	color = WHITE;
 }
 
 Triangle::Triangle(Point points[3], Color color){
-	for(int i=0; i<3; i++){
+	for(int i=0; i<CORNER; i++){
 		this->points[i] = points[i];
 	}
 	
@@ -29,7 +29,7 @@ Triangle::Triangle(Point p1, Point p2, Point p3, Color color){
 }
 
 ostream& operator<<(ostream &out, const Triangle &P){
-	for(int i=0; i<Triangle::SIDE; i++){
+	for(int i=0; i<Triangle::CORNER; i++){
 		out << P.points[i] << endl;
 	}
 	out << P.color << endl;
@@ -38,12 +38,12 @@ ostream& operator<<(ostream &out, const Triangle &P){
 }
 		
 Point Triangle::getPointAt(int index){
-	assert(index>=0 && index<SIDE);
+	assert(index>=0 && index<CORNER);
 	return points[index];
 }
 
 void Triangle::setPointAt(int index, const Point P){
-	assert(index>=0 && index<SIDE);
+	assert(index>=0 && index<CORNER);
 	points[index] = P;
 }
 
@@ -58,20 +58,20 @@ void Triangle::setColor(Color color){
 void Triangle::draw() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_TRIANGLES);
-	glColor3f(color.getRed(), color.getBlue(), color.getGreen());
-	glVertex3f(points[0].getX(), points[0].getY(), points[0].getZ());
-	glVertex3f(points[1].getX(), points[1].getY(), points[1].getZ());
-	glVertex3f(points[2].getX(), points[2].getY(), points[2].getZ());
+		glColor3f(color.getRed(), color.getBlue(), color.getGreen());
+		glVertex3f(points[0].getX(), points[0].getY(), points[0].getZ());
+		glVertex3f(points[1].getX(), points[1].getY(), points[1].getZ());
+		glVertex3f(points[2].getX(), points[2].getY(), points[2].getZ());
 	glEnd();
 }
 
 void Triangle::drawOutline(){
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glBegin(GL_TRIANGLES);
-	glColor3f(color.getRed(), color.getBlue(), color.getGreen());
-	glVertex3f(points[0].getX(), points[0].getY(), points[0].getZ());
-	glVertex3f(points[1].getX(), points[1].getY(), points[1].getZ());
-	glVertex3f(points[2].getX(), points[2].getY(), points[2].getZ());
+		glColor3f(color.getRed(), color.getBlue(), color.getGreen());
+		glVertex3f(points[0].getX(), points[0].getY(), points[0].getZ());
+		glVertex3f(points[1].getX(), points[1].getY(), points[1].getZ());
+		glVertex3f(points[2].getX(), points[2].getY(), points[2].getZ());
 	glEnd();
 }
 

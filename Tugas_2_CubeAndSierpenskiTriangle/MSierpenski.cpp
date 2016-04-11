@@ -1,11 +1,21 @@
 #include "GL/freeglut.h"
 #include "GL/gl.h"
 #include "Triangle.hpp"
+#include <string.h>
+#include <iostream>
 
 void display();
 void reshape(int width, int height);
 
+int loop = 0;
+string code = "";
+
 int main(int argc, char** argv) {
+	cout << "Berapa iterasi: ";
+	cin >> loop;
+	cout << "fill / outline: ";
+	cin >> code;
+	
     /* Initialize */
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
@@ -47,7 +57,10 @@ void display(){
 	color[4] = BLACK;
 	color[5] = Color(0.5, 0.5, 0.5);
 	
-	triangle.drawSierpinski(color, 6, Triangle::SIERPINSKI_OUTLINE);
+	if(code == "fill")
+		triangle.drawSierpinski(color, 6, Triangle::SIERPINSKI_FILL);
+	else if(code == "outline")
+		triangle.drawSierpinski(color, 6, Triangle::SIERPINSKI_OUTLINE);
 	
 	glFlush();
 }
