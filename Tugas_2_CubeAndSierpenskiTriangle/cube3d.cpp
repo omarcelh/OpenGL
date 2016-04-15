@@ -1,25 +1,23 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <math.h>
-#include <GL/glut.h>
+#include "cube3d.hpp"
+#include <cassert>
  
-// ----------------------------------------------------------
-// Function Prototypes
-// ----------------------------------------------------------
-void display();
-void specialKeys();
- 
-// ----------------------------------------------------------
-// Global Variables
-// ----------------------------------------------------------
-double rotate_y=0; 
-double rotate_x=0;
- 
+cube3d::cube3d(){
+	xpos = 0;
+	ypos = 0;
+	zpos = 0;
+}
+
+cube3d::cube3d(GLfloat x, GLfloat y, GLfloat z, GLfloat sisi_cube){
+	xpos = x;
+	ypos = y;
+	zpos = z;
+	sisi = sisi_cube;
+}
 // ----------------------------------------------------------
 // display() Callback function
 // ----------------------------------------------------------
-void display(){
- 
+void cube3d::draw(){
+  
   //  Clear screen and Z-buffer
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
  
@@ -31,8 +29,11 @@ void display(){
   // glRotatef( 180, 0.0, 1.0, 0.0 );    // Not included
  
   // Rotate when user changes rotate_x and rotate_y
-  glRotatef( rotate_x, 1.0, 0.0, 0.0 );
-  glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+  glTranslatef(-1,-1,-1);
+  //glRotatef( rotate_x, 1.0, 0.0, 0.0 );
+  glTranslatef(1.5,1.5,1.5);
+ // glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+ // glRotatef( rotate_z, 0.0, 0.0, 1.0 );
  
   // Other Transformations
   // glScalef( 2.0, 2.0, 0.0 );          // Not included
@@ -40,105 +41,99 @@ void display(){
   //Yellow side - FRONT
   glBegin(GL_POLYGON);
  
-  glColor3f( 1.0, 1.0, 0.0 );     glVertex3f(  0.5, -0.5, -0.5 );      
-  glColor3f( 1.0, 1.0, 0.0 );     glVertex3f(  0.5,  0.5, -0.5 );      
-  glColor3f( 1.0, 1.0, 0.0 );     glVertex3f( -0.5,  0.5, -0.5 );      
-  glColor3f( 1.0, 1.0, 0.0 );     glVertex3f( -0.5, -0.5, -0.5 );      
+  glColor3f( 1.0, 1.0, 0.0 );     glVertex3f(  xpos+(sisi/2), ypos-(sisi/2), zpos-(sisi/2) );//kanan bwh      
+    glVertex3f(  xpos+(sisi/2),  ypos+(sisi/2), zpos-(sisi/2) );//kanan atas      
+    glVertex3f( xpos-(sisi/2),  ypos+(sisi/2), zpos-(sisi/2) );//kiri atas      
+    glVertex3f( xpos-(sisi/2), ypos-(sisi/2), zpos-(sisi/2) );//kiri bawah      
  
   glEnd();
  
   // White side - BACK
   glBegin(GL_POLYGON);
   glColor3f(   1.0,  1.0, 1.0 );
-  glVertex3f(  0.5, -0.5, 0.5 );
-  glVertex3f(  0.5,  0.5, 0.5 );
-  glVertex3f( -0.5,  0.5, 0.5 );
-  glVertex3f( -0.5, -0.5, 0.5 );
+  glVertex3f(xpos+(sisi/2), ypos-(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos+(sisi/2), ypos+(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos+(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos-(sisi/2), zpos+(sisi/2));
   glEnd();
  
   // Purple side - RIGHT
   glBegin(GL_POLYGON);
   glColor3f(  1.0,  0.0,  1.0 );
-  glVertex3f( 0.5, -0.5, -0.5 );
-  glVertex3f( 0.5,  0.5, -0.5 );
-  glVertex3f( 0.5,  0.5,  0.5 );
-  glVertex3f( 0.5, -0.5,  0.5 );
+  glVertex3f(xpos+(sisi/2), ypos-(sisi/2), zpos-(sisi/2));
+  glVertex3f(xpos+(sisi/2), ypos+(sisi/2), zpos-(sisi/2));
+  glVertex3f(xpos+(sisi/2), ypos+(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos+(sisi/2), ypos-(sisi/2), zpos+(sisi/2));
   glEnd();
  
   // Green side - LEFT
   glBegin(GL_POLYGON);
   glColor3f(   0.0,  1.0,  0.0 );
-  glVertex3f( -0.5, -0.5,  0.5 );
-  glVertex3f( -0.5,  0.5,  0.5 );
-  glVertex3f( -0.5,  0.5, -0.5 );
-  glVertex3f( -0.5, -0.5, -0.5 );
+  glVertex3f(xpos-(sisi/2), ypos-(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos+(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos+(sisi/2), zpos-(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos-(sisi/2), zpos-(sisi/2));
   glEnd();
  
   // Blue side - TOP
   glBegin(GL_POLYGON);
   glColor3f(   0.0,  0.0,  1.0 );
-  glVertex3f(  0.5,  0.5,  0.5 );
-  glVertex3f(  0.5,  0.5, -0.5 );
-  glVertex3f( -0.5,  0.5, -0.5 );
-  glVertex3f( -0.5,  0.5,  0.5 );
+  glVertex3f(xpos+(sisi/2), ypos+(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos+(sisi/2), ypos+(sisi/2), zpos-(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos+(sisi/2), zpos-(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos+(sisi/2), zpos+(sisi/2));
   glEnd();
  
   // Red side - BOTTOM
   glBegin(GL_POLYGON);
   glColor3f(   1.0,  0.0,  0.0 );
-  glVertex3f(  0.5, -0.5, -0.5 );
-  glVertex3f(  0.5, -0.5,  0.5 );
-  glVertex3f( -0.5, -0.5,  0.5 );
-  glVertex3f( -0.5, -0.5, -0.5 );
+  glVertex3f(xpos+(sisi/2), ypos-(sisi/2), zpos-(sisi/2));
+  glVertex3f(xpos+(sisi/2), ypos-(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos-(sisi/2), zpos+(sisi/2));
+  glVertex3f(xpos-(sisi/2), ypos-(sisi/2), zpos-(sisi/2));
   glEnd();
  
   glFlush();
   glutSwapBuffers();
  
 }
- 
-// ----------------------------------------------------------
-// specialKeys() Callback Function
-// ----------------------------------------------------------
-void specialKeys( int key, int x, int y ) {
- 
-  //  Right arrow - increase rotation by 5 degree
-  if (key == GLUT_KEY_RIGHT)
-    rotate_y += 5;
- 
-  //  Left arrow - decrease rotation by 5 degree
-  else if (key == GLUT_KEY_LEFT)
-    rotate_y -= 5;
- 
-  else if (key == GLUT_KEY_UP)
-    rotate_x += 5;
- 
-  else if (key == GLUT_KEY_DOWN)
-    rotate_x -= 5;
- 
-  //  Request display update
-  glutPostRedisplay();
- 
+double cube3d::getRotatex(){return rotate_x;};
+double cube3d::getRotatey(){return rotate_y;};
+double cube3d::getRotatez(){return rotate_z;};
+GLfloat cube3d::getXpos(){return xpos;};
+GLfloat cube3d::getYpos(){return ypos;};
+GLfloat cube3d::getZpos(){return zpos;};
+GLfloat cube3d::getsisi(){return sisi;};
+void cube3d::rotateX(GLfloat pusatx, GLfloat pusaty, GLfloat pusatz, double sudut)
+{
+
+	rotate_x = sudut;
+
 }
 
-// ----------------------------------------------------------
-// reshape() Callback Function
-// ----------------------------------------------------------
-void reshape(int width, int height){
-	GLfloat aspectRatio = (GLfloat)width / (GLfloat)height;
-
-  glMatrixMode(GL_PROJECTION);
-
-  glLoadIdentity();
-
-  gluPerspective(0.0f, aspectRatio*2, 0.1f, 100.0f);
+void cube3d::rotateY(GLfloat pusatx, GLfloat pusaty, GLfloat pusatz, double sudut)
+{
+	rotate_y = sudut;
+	//glTranslatef (pusatx, pusaty, pusatz);
+	//glutPostRedisplay();
 }
- 
+
+void cube3d::rotateZ(GLfloat pusatx, GLfloat pusaty, GLfloat pusatz, double sudut)
+{
+	rotate_z = sudut;
+	//glTranslatef (pusatx, pusaty, pusatz);
+	//glutPostRedisplay();
+}
 // ----------------------------------------------------------
 // main() function
 // ----------------------------------------------------------
 int main(int argc, char* argv[]){
- 
+  float a,pusatx,pusaty,pusatz;	
+  cout << "masukan panjang sisi, pusat x, pusat y, pusat z (range -1 s/d 1)" << endl ;  
+	cin >> a;
+	cin >> pusatx;
+	cin >> pusaty;
+	cin >> pusatz;
   //  Initialize GLUT and process user parameters
   glutInit(&argc,argv);
  
@@ -146,17 +141,19 @@ int main(int argc, char* argv[]){
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
  
   // Create window
+  glutInitWindowSize(500,500);
   glutCreateWindow("Chinese Cube");
- 
+	
   //  Enable Z-buffer depth test
   glEnable(GL_DEPTH_TEST);
  
   // Callback functions
-  glutDisplayFunc(display);
-  glutSpecialFunc(specialKeys);
-  
-  // Prevent stretching when resizing windows
-	glutReshapeFunc(reshape);
+  cube3d cube(pusatx,pusaty,pusatz,a);
+  cube.draw();
+  //rotate sb x 180
+  cube.rotateX(0,0,0,180);
+  cube.draw();
+
  
   //  Pass control to GLUT for events
   glutMainLoop();
