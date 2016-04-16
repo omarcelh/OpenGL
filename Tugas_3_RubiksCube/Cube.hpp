@@ -28,6 +28,5 @@ class Cube{
 	private:
 		//attribute
 		Square *squares;
-		
 };
 
