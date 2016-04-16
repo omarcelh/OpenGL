@@ -63,6 +63,7 @@ void Rubiks::draw() {
 		for(int j=0; j<RUBIX_COUNT; j++) {
 			for(int k=0; k<RUBIX_COUNT; k++) {
 				cubes[i][j][k].draw();
+				cubes[i][j][k].drawBlackOutline();
 			}
 		}
 	}

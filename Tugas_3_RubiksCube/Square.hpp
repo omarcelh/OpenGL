@@ -22,6 +22,7 @@ class Square{
 		void setPointAt(int index, const Point P);
 		void draw();
 		void drawOutline();
+		void drawBlackOutline();
 		void rotate(Point origin, float alpha, float beta, float gamma);
 		void move(float dx, float dy, float dz);
 	private:

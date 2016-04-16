@@ -126,6 +126,12 @@ void Cube::drawOutline(){
 	}
 }
 
+void Cube::drawBlackOutline() {
+	for(int i=0; i<SIDE; i++){
+		squares[i].drawBlackOutline();
+	}
+}
+
 void Cube::rotate(Point origin, float alpha, float beta, float gamma){
 	for(int i=0; i<SIDE; i++){
 		squares[i].rotate(origin, alpha, beta, gamma);

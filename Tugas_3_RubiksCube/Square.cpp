@@ -111,6 +111,19 @@ void Square::drawOutline(){
 	glEnd();
 }
 
+void Square::drawBlackOutline() {
+	glLineWidth(6);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glDepthFunc(GL_LEQUAL);
+	glBegin(GL_POLYGON);
+		glColor3f(0, 0, 0);
+		glVertex3f(points[0].getX(), points[0].getY(), points[0].getZ());
+		glVertex3f(points[1].getX(), points[1].getY(), points[1].getZ());
+		glVertex3f(points[2].getX(), points[2].getY(), points[2].getZ());
+		glVertex3f(points[3].getX(), points[3].getY(), points[3].getZ());
+	glEnd();	
+}
+
 void Square::rotate(Point origin, float alpha, float beta, float gamma){
 	for(int i=0; i<CORNER; i++){
 		points[i].rotate(origin, alpha, beta, gamma);

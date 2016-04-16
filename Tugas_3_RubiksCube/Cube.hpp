@@ -22,6 +22,7 @@ class Cube{
 		void setSquareAt(int index, const Square S);
 		void draw();
 		void drawOutline();
+		void drawBlackOutline();
 		void rotate(Point origin, float alpha, float beta, float gamma);
 		void move(float dx, float dy, float dz);
 	private:
