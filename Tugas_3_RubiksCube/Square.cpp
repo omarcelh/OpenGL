@@ -4,13 +4,15 @@
 const int Square::CORNER = 4;
 
 Square::Square(){
+	points = new Point[CORNER];
 	for(int i=0; i<CORNER; i++){
 		points[i] = Point(0.0f, 0.0f, 0.0f);
 	}
 	color = WHITE;
 }
 
-Square::Square(Point points[4], Color color){
+Square::Square(Point *points, Color color){
+	this->points = new Point[CORNER];
 	for(int i=0; i<CORNER; i++){
 		this->points[i] = points[i];
 	}
@@ -19,6 +21,7 @@ Square::Square(Point points[4], Color color){
 }
 
 Square::Square(Point p1, Point p2, Point p3, Point p4, Color color){
+	points = new Point[CORNER];
 	points[0] = p1;
 	points[1] = p2;
 	points[2] = p3;
@@ -26,6 +29,30 @@ Square::Square(Point p1, Point p2, Point p3, Point p4, Color color){
 
 	this->color = color;
 }
+
+Square::Square(const Square &S){
+	points = new Point[CORNER];
+	for(int i=0; i<CORNER; i++){
+		points[i] = S.points[i];
+	}
+	color = S.color;
+}
+
+Square::~Square(){
+	delete [] points;
+}
+
+Square& Square::operator=(const Square &S){
+	delete[] points;
+	this->points = new Point[CORNER];
+	for(int i=0; i<CORNER; i++){
+		this->points[i] = S.points[i];
+	}
+	this->color = S.color;
+	
+	return *this;
+}
+
 
 ostream& operator<<(ostream &out, const Square &P){
 	for(int i=0; i<Square::CORNER; i++){
@@ -87,6 +114,12 @@ void Square::drawOutline(){
 void Square::rotate(Point origin, float alpha, float beta, float gamma){
 	for(int i=0; i<CORNER; i++){
 		points[i].rotate(origin, alpha, beta, gamma);
+	}
+}
+
+void Square::move(float dx, float dy, float dz){
+	for(int i=0; i<CORNER; i++){
+		points[i] = points[i] + Point(dx, dy, dz);
 	}
 }
 

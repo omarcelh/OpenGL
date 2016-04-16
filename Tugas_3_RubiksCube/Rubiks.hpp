@@ -2,6 +2,7 @@
 #define RUBIKS_H 
 
 #include "Cube.hpp"
+#define RUBIX_COUNT 3
 
 class Rubiks {
 	public :
@@ -15,8 +16,10 @@ class Rubiks {
 		Point getPosition();
 		GLfloat getSize();
 
+		void draw();
+
 	private :
-		Cube cubes[3][3][3];
+		Cube cubes[RUBIX_COUNT][RUBIX_COUNT][RUBIX_COUNT];
 		Point position;
 		GLfloat size;
 		const Point defaultPosition;

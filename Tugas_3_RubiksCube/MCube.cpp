@@ -44,7 +44,8 @@ int main(int argc, char** argv){
 	colors[5] = Color(1,0.5,0);
 	
 	C1 = Cube(center1, side1, colors);
-	C2 = Cube(center2, side2, colors);
+	C2 = C1;
+	C2.move(side1, side1, side1);
 
 	/* Finalize */
 	glutSwapBuffers();
