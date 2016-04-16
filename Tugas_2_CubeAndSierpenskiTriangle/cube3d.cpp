@@ -2,16 +2,16 @@
 #include <cassert>
  
 cube3d::cube3d(){
-	xpos = 0;
-	ypos = 0;
-	zpos = 0;
+  xpos = 0;
+  ypos = 0;
+  zpos = 0;
 }
 
 cube3d::cube3d(GLfloat x, GLfloat y, GLfloat z, GLfloat sisi_cube){
-	xpos = x;
-	ypos = y;
-	zpos = z;
-	sisi = sisi_cube;
+  xpos = x;
+  ypos = y;
+  zpos = z;
+  sisi = sisi_cube;
 }
 // ----------------------------------------------------------
 // display() Callback function
@@ -29,11 +29,11 @@ void cube3d::draw(){
   // glRotatef( 180, 0.0, 1.0, 0.0 );    // Not included
  
   // Rotate when user changes rotate_x and rotate_y
-  glTranslatef(-1,-1,-1);
-  //glRotatef( rotate_x, 1.0, 0.0, 0.0 );
-  glTranslatef(1.5,1.5,1.5);
- // glRotatef( rotate_y, 0.0, 1.0, 0.0 );
- // glRotatef( rotate_z, 0.0, 0.0, 1.0 );
+  //glTranslatef(-1,-1,-1);
+  glRotatef( rotate_x, 1.0, 0.0, 0.0 );
+  //glTranslatef(1.5,1.5,1.5);
+  glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+  glRotatef( rotate_z, 0.0, 0.0, 1.0 );
  
   // Other Transformations
   // glScalef( 2.0, 2.0, 0.0 );          // Not included
@@ -107,33 +107,38 @@ GLfloat cube3d::getsisi(){return sisi;};
 void cube3d::rotateX(GLfloat pusatx, GLfloat pusaty, GLfloat pusatz, double sudut)
 {
 
-	rotate_x = sudut;
+  rotate_x = sudut;
+  
 
 }
 
 void cube3d::rotateY(GLfloat pusatx, GLfloat pusaty, GLfloat pusatz, double sudut)
 {
-	rotate_y = sudut;
-	//glTranslatef (pusatx, pusaty, pusatz);
-	//glutPostRedisplay();
+  rotate_y = sudut;
+  //glTranslatef (pusatx, pusaty, pusatz);
+  //glutPostRedisplay();
 }
 
 void cube3d::rotateZ(GLfloat pusatx, GLfloat pusaty, GLfloat pusatz, double sudut)
 {
-	rotate_z = sudut;
-	//glTranslatef (pusatx, pusaty, pusatz);
-	//glutPostRedisplay();
+  rotate_z = sudut;
+  //glTranslatef (pusatx, pusaty, pusatz);
+  //glutPostRedisplay();
 }
 // ----------------------------------------------------------
 // main() function
 // ----------------------------------------------------------
 int main(int argc, char* argv[]){
-  float a,pusatx,pusaty,pusatz;	
+  float a,pusatx,pusaty,pusatz; 
+ int pilihan;
   cout << "masukan panjang sisi, pusat x, pusat y, pusat z (range -1 s/d 1)" << endl ;  
-	cin >> a;
-	cin >> pusatx;
-	cin >> pusaty;
-	cin >> pusatz;
+  cin >> a;
+  cin >> pusatx;
+  cin >> pusaty;
+  cin >> pusatz;
+
+  cout << "pilihan 1. rotate sb-x , 2. rotate sb-y, 3. rotate sb-z" <<endl;
+  cin >> pilihan;
   //  Initialize GLUT and process user parameters
   glutInit(&argc,argv);
  
@@ -143,7 +148,7 @@ int main(int argc, char* argv[]){
   // Create window
   glutInitWindowSize(500,500);
   glutCreateWindow("Chinese Cube");
-	
+  
   //  Enable Z-buffer depth test
   glEnable(GL_DEPTH_TEST);
  
@@ -151,8 +156,18 @@ int main(int argc, char* argv[]){
   cube3d cube(pusatx,pusaty,pusatz,a);
   cube.draw();
   //rotate sb x 180
-  cube.rotateX(0,0,0,180);
+  if(pilihan == 1){
+  cube.rotateX(0,0,0,90);
+  }
+  if(pilihan == 2){
+  cube.rotateY(0,0,0,90); 
+}
+  if(pilihan == 3){
+  cube.rotateZ(0,0,0,90);
+
+}
   cube.draw();
+  
 
  
   //  Pass control to GLUT for events
