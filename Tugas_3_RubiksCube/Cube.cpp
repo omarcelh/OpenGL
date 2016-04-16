@@ -4,18 +4,21 @@
 const int Cube::SIDE = 6;
 
 Cube::Cube(){
+	squares = new Square[SIDE];
 	for(int i=0; i<SIDE; i++){
 		squares[i] = Square();
 	}
 }
 
 Cube::Cube(Square squares[6]){
+	this->squares = new Square[SIDE];
 	for(int i=0; i<SIDE; i++){
 		this->squares[i] = squares[i];
 	}
 }
 
 Cube::Cube(Point center, GLfloat side, Color colors[6]){
+	squares = new Square[SIDE];
 	Square S_front, S_back, S_right, S_left, S_top, S_bottom;
 	Point front_bottomleft, front_topleft, front_topright, front_bottomright;
 	Point back_bottomleft, back_topleft, back_topright, back_bottomright;
@@ -49,6 +52,26 @@ Cube::Cube(Point center, GLfloat side, Color colors[6]){
 	squares[5] = Square(back_bottomleft, front_bottomleft, front_bottomright, back_bottomright, colors[5]);
 	
 	cout << *this << endl;
+}
+
+Cube::Cube(const Cube &C){
+	squares = new Square[SIDE];
+	for(int i=0; i<SIDE; i++){
+		squares[i] = C.squares[i];
+	}
+}
+
+Cube::~Cube(){
+	delete[] squares;
+}
+
+Cube& Cube::operator=(const Cube &C){
+	delete[] squares;
+	this->squares = new Square[SIDE];
+	for(int i=0; i<SIDE; i++){
+		this->squares[i] = C.squares[i];
+	}
+	return *this;
 }
 
 ostream& operator<<(ostream &out, const Cube &P){
@@ -106,6 +129,12 @@ void Cube::drawOutline(){
 void Cube::rotate(Point origin, float alpha, float beta, float gamma){
 	for(int i=0; i<SIDE; i++){
 		squares[i].rotate(origin, alpha, beta, gamma);
+	}
+}
+
+void Cube::move(float dx, float dy, float dz){
+	for(int i=0; i<SIDE; i++){
+		squares[i].move(dx, dy, dz);
 	}
 }
 

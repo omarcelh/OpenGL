@@ -7,8 +7,12 @@ class Cube{
 		
 		//methods
 		Cube();
-		Cube(Square squares[6]);
+		Cube(Square *squares);
 		Cube(Point center, GLfloat side, Color colors[6]);
+		Cube(const Cube &C);
+		~Cube();
+		Cube& operator=(const Cube &C);
+		
 		friend ostream& operator<<(ostream &out, const Cube &P);
 		
 		Point getCenterPoint();
@@ -19,9 +23,10 @@ class Cube{
 		void draw();
 		void drawOutline();
 		void rotate(Point origin, float alpha, float beta, float gamma);
+		void move(float dx, float dy, float dz);
 	private:
 		//attribute
-		Square squares[6];
+		Square *squares;
 		
 };
 
