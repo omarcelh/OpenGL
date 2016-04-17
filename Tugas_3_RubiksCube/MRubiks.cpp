@@ -80,10 +80,10 @@ void specialKeys( int key, int x, int y ) {
 		case GLUT_KEY_F2	: rotate_z -= ROTATION; break;
 		case GLUT_KEY_F3	: rubiks.rotateSide(1, 0, 10); break;
 		case GLUT_KEY_F4	: rubiks.rotateSide(1, 0, -10); break;
-		case GLUT_KEY_F5	: rubiks.rotateSide(1, 1, 10); break;
-		case GLUT_KEY_F6	: rubiks.rotateSide(1, 1, -10); break;
-		case GLUT_KEY_F7	: rubiks.rotateSide(2, 0, 10); break;
-		case GLUT_KEY_F8	: rubiks.rotateSide(2, 0, -10); break;
+		case GLUT_KEY_F5	: rubiks.rotateSide(2, 0, 10); break;
+		case GLUT_KEY_F6	: rubiks.rotateSide(2, 0, -10); break;
+		case GLUT_KEY_F7	: rubiks.rotateSide(3, 0, 10); break;
+		case GLUT_KEY_F8	: rubiks.rotateSide(3, 0, -10); break;
 		default: break;
 	}
 	

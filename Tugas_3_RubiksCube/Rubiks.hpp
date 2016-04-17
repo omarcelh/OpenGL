@@ -25,10 +25,9 @@ class Rubiks {
 		Cube cubes[RUBIX_COUNT][RUBIX_COUNT][RUBIX_COUNT];
 		Point position;
 		GLfloat size;
-		int currentRowMark;
+		int currentAxis;
 		int currentLevel;
 		GLfloat currentDegree;
-		GLfloat rotationState;
 		const Point defaultPosition;
 		const GLfloat defaultSize;
 };
