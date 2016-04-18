@@ -6,6 +6,7 @@ using namespace std;
 void display();
 void reshape(int width, int height);
 void specialKeys(int key, int x, int y);
+void keyPressed(unsigned char key, int x, int y);
 
 // Global variable
 Rubiks rubiks;
@@ -24,6 +25,7 @@ int main(int argc, char** argv){
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutSpecialFunc(specialKeys);
+	glutKeyboardFunc(keyPressed);
 
 	/* Initialize for drawing */
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,12 +80,6 @@ void specialKeys( int key, int x, int y ) {
 		case GLUT_KEY_DOWN	: rotate_x -= ROTATION; break;
 		case GLUT_KEY_F1	: rotate_z += ROTATION; break;
 		case GLUT_KEY_F2	: rotate_z -= ROTATION; break;
-		case GLUT_KEY_F3	: rubiks.rotateSide(1, 0, 10); break;
-		case GLUT_KEY_F4	: rubiks.rotateSide(1, 0, -10); break;
-		case GLUT_KEY_F5	: rubiks.rotateSide(2, 0, 10); break;
-		case GLUT_KEY_F6	: rubiks.rotateSide(2, 0, -10); break;
-		case GLUT_KEY_F7	: rubiks.rotateSide(3, 0, 10); break;
-		case GLUT_KEY_F8	: rubiks.rotateSide(3, 0, -10); break;
 		default: break;
 	}
 	
@@ -91,3 +87,71 @@ void specialKeys( int key, int x, int y ) {
 
 }
 
+void keyPressed(unsigned char key, int x, int y){
+switch(key)
+	{
+	case 'q' :
+		rubiks.rotateSide(1, 2, 10);
+		break;
+
+	case 'w' :
+		rubiks.rotateSide(1, 2, -10);
+		break;
+
+	case 'e' :
+		rubiks.rotateSide(2, 0, 10);
+		break;
+	case 'r' :
+		rubiks.rotateSide(2, 0, -10);
+		break;
+	case 't' :
+		rubiks.rotateSide(3, 2, 10);
+		break;
+	case 'y' :
+		rubiks.rotateSide(3, 2, -10);
+		break;
+	case 'a' :
+		rubiks.rotateSide(1, 1, 10);
+		break;
+
+	case 's' :
+		rubiks.rotateSide(1, 1, -10);
+		break;
+
+	case 'd' :
+		rubiks.rotateSide(2, 1, 10);
+		break;
+	case 'f' :
+		rubiks.rotateSide(2, 1, -10);
+		break;
+	case 'g' :
+		rubiks.rotateSide(3, 1, 10);
+		break;
+	case 'h' :
+		rubiks.rotateSide(3, 1, -10);
+		break;
+	case 'z' :
+		rubiks.rotateSide(1, 0, 10);
+		break;
+
+	case 'x' :
+		rubiks.rotateSide(1, 0, -10);
+		break;
+
+	case 'c' :
+		rubiks.rotateSide(2, 2, 10);
+		break;
+	case 'v' :
+		rubiks.rotateSide(2, 2, -10);
+		break;
+	case 'b' :
+		rubiks.rotateSide(3, 0, 10);
+		break;
+	case 'n' :
+		rubiks.rotateSide(3, 0, -10);
+		break;
+		
+	}
+	glutPostRedisplay();
+
+}
